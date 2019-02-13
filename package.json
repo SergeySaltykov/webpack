@@ -1,0 +1,14 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "webpack 4 react",
+  "main": "webpack.config.js",
+  "author": "Sergey Saltykov",
+  "license": "ISC",
+  "scripts": {
+    "build": "",
+    "dev": "",
+    "start": "",
+    "test": ""
+  }
+s}
