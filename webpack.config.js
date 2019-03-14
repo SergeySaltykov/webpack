@@ -102,7 +102,7 @@ module.exports = {
             '@babel/polyfill', // кроссбраузерность
             'whatwg-fetch',
         ],
-        index:     './src/app/index.js',    // определяем точку входа
+        index: './src/app/index',    // определяем точку входа
     },
     module: {
         rules: [
@@ -146,7 +146,7 @@ module.exports = {
         splitChunks: {chunks: 'all'},
     },
     output: {      // выход билда
-        chunkFilename: 'js/chunk-[name].min.js',
+        chunkFilename: 'js/[name].min.js',
         filename: 'js/[name].min.js',
         path: paths.build,
     },
