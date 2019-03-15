@@ -24,7 +24,7 @@ const cleanOptions = {
     verbose: true,
 };
 
-// style loaders
+//style loaders
 const styleLoader = {
     loader: 'style-loader',
 };
@@ -41,6 +41,11 @@ const lessLoader = {
         sourceMap: true,
     }
 };
+const miniCssPlugin = new MiniCssExtractPlugin({ // извлекает css в отдельные файлы
+    chunkFilename: 'css/[id].min.css',
+    filename: 'css/[name].min.css',
+});
+const styleLoaderOrPlugin = isProd ? MiniCssExtractPlugin.loader : styleLoader; // MiniCssExtractPlugin used only on production
 
 // plugins
 const plugins = [
@@ -52,10 +57,7 @@ const plugins = [
         filename: path.resolve(paths.www, './index.html'), // путь к файлу
         title: 'Application',
     }),
-    new MiniCssExtractPlugin({ // извлекает css в отдельные файлы
-        chunkFilename: isProd ? 'css/[id].min.css' : 'css/[id].css',
-        filename: isProd ? 'css/[name].min.css' : 'css/[name].css',
-    }),
+    miniCssPlugin,
     new HtmlWebpackHarddiskPlugin(),  // плагин позволяет убрать пути по умолчанию
 ];
 
@@ -115,21 +117,18 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: [styleLoader, cssLoader, lessLoader],
+                use: [styleLoaderOrPlugin, cssLoader, lessLoader],
             },
             {
                 test: /\.css$/,
-                use: [styleLoader, cssLoader],
+                use: [styleLoaderOrPlugin, cssLoader],
             },
             {
-                test: /.*\.(jpe?g|png|gif|svg)$/i,
+                test: /\.(png|jpe?g|gif|svg)$/i,
                 loader: 'url-loader',
                 options: {
-                    fallback: 'file-loader',
-                    options: {
-                        limit: 5000,
-                        name: 'build/img/[hash:8].[ext]?[hash:4]',
-                    },
+                    limit: 100000, // default fallback: 'file-loader',
+                    name: 'img/[hash:8].[ext]?[hash:4]',
                 },
             },
             {
