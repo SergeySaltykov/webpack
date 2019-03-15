@@ -157,7 +157,7 @@ module.exports = {
         chunkFilename: 'js/[name].min.js',
         filename: 'js/[name].min.js',
         path: paths.build,
-        publicPath: '/build/'  // важный параметр, так же webpack-dev-server использует для определения где следует обслуживать выходные файлы
+        publicPath: '/build'  // важный параметр, так же webpack-dev-server использует для определения где следует обслуживать выходные файлы
     },
     resolve: { // расширение модулей
         extensions: ['.js', '.jsx'], // определяем расширение файла (значения по умолчанию webpack ['.wasm', '.mjs', '.js', '.json'])
