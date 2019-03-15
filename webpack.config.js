@@ -123,11 +123,11 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: [styleLoaderOrPlugin, 'css-loader', 'less-loader'],
+                use: [styleLoaderOrPlugin, 'css-loader', 'postcss-loader', 'less-loader'],
             },
             {
                 test: /\.css$/,
-                use: [styleLoaderOrPlugin, 'css-loader'],
+                use: [styleLoaderOrPlugin, 'css-loader', 'postcss-loader'],
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
