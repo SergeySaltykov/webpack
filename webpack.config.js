@@ -25,41 +25,47 @@ const cleanOptions = {
 };
 
 //style loaders
-const styleLoader = {
-    loader: 'style-loader',
-};
-const cssLoader = {
-    loader: 'css-loader',
-    options: {
-        sourceMap: true,
-        modules: true,
-    }
-};
-const lessLoader = {
-    loader: 'less-loader',
-    options: {
-        sourceMap: true,
-    }
-};
-const miniCssPlugin = new MiniCssExtractPlugin({ // извлекает css в отдельные файлы
-    chunkFilename: 'css/[id].min.css',
-    filename: 'css/[name].min.css',
-});
-const styleLoaderOrPlugin = isProd ? MiniCssExtractPlugin.loader : styleLoader; // MiniCssExtractPlugin used only on production
+// const cssLoader = {
+//     loader: 'css-loader',
+    // options: {
+        // попробовать оптимизировать css.
+        // sourceMap: true,
+        // modules: true,
+        // ...(
+        //     isProd ? {
+        //         getLocalIdent: () => {},
+        //
+        //     } : {
+        //         localIdentName: '[folder]_[name]'
+        //     }
+        // ),
+    // }
+// };
+// const lessLoader = {
+//     loader: 'less-loader',
+    // options: {
+    //     sourceMap: true,
+    // }
+// };
 
 // plugins
 const plugins = [
-    new HtmlWebpackPlugin({
-        alwaysWriteToDisk: true, // генерация записи на диск для локального запуска
-        inject: true, // все скрипты будут грузиться после body
-        hash: true, // добавляет в конце файла хеш чтобы не кешировались стили
-        template: path.resolve(paths.src, './index.html'), // путь к шаблону
-        filename: path.resolve(paths.www, './index.html'), // путь к файлу
-        title: 'Application',
-    }),
-    miniCssPlugin,
-    new HtmlWebpackHarddiskPlugin(),  // плагин позволяет убрать пути по умолчанию
-];
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true, // генерация записи на диск для локального запуска
+            inject: true, // все скрипты будут грузиться после body
+            hash: true, // добавляет в конце файла хеш чтобы не кешировались стили
+            template: path.resolve(paths.src, './index.html'), // путь к шаблону
+            filename: path.resolve(paths.www, './index.html'), // путь к файлу
+            title: 'Application',
+        }),
+        new MiniCssExtractPlugin({ // извлекает css в отдельные файлы
+            chunkFilename: 'css/[id].min.css',
+            filename: 'css/[name].min.css',
+        }),
+        new HtmlWebpackHarddiskPlugin(),  // плагин позволяет убрать пути по умолчанию
+    ]
+;
+const styleLoaderOrPlugin = isProd ? MiniCssExtractPlugin.loader : 'style-loader'; // MiniCssExtractPlugin used only on production, for hot reload
 
 if (isProd) {
     plugins.unshift(
@@ -117,11 +123,11 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: [styleLoaderOrPlugin, cssLoader, lessLoader],
+                use: [styleLoaderOrPlugin, 'css-loader', 'less-loader'],
             },
             {
                 test: /\.css$/,
-                use: [styleLoaderOrPlugin, cssLoader],
+                use: [styleLoaderOrPlugin, 'css-loader'],
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
