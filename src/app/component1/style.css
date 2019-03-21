@@ -1,7 +1,11 @@
+@import "./color.css";
+
 .component1 {
-    color: green;
+    color: var(--error); /*теперь в браузере отобраиться поддержка новго ситнаксиса, или запасной вариант если версия браузера не поддерживает такой синтаксис*/
     display: flex;
     flex-direction: column;
-    background: transparent radial-gradient(farthest-side at 30px 2em, red, transparent),
-    linear-gradient(hsl(230, 45%, 86%), transparent 3em, peachpuff);
+
+    &:hover{
+         color: var(--success);
+     }
 }
