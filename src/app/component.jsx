@@ -3,6 +3,9 @@ import img from '../../www/content/img/home.jpg';
 import img1 from '../../www/content/img/1.jpg';
 import {Component1} from 'app/component1/component';
 import {Component2} from 'app/component2/component';
+import {Component3} from 'app/component3/component';
+
+const text = 'проверка пропсов';
 
 class Component extends React.PureComponent {
     render() {
@@ -11,6 +14,7 @@ class Component extends React.PureComponent {
                 <h1>React component!</h1>
                 <Component1 />
                 <Component2 />
+                <Component3 text={text}/>
                 Проверка фотографии меньше 100кб. заварачивает в base64.
                 <img src={img} alt="home" />
                 Проверка фотографии больше 100кб. отдельный файл.
