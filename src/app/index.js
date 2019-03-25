@@ -1,7 +1,9 @@
-import Component from 'app/component';
-import React from 'react';
 import renderDom from 'react-dom';
+import renderApp from './store';
+
+// import React from 'react';
+// import { renderApp } from './store';
 
 const root = document.getElementById('root');
 
-renderDom.hydrate(<Component/>, root);
+renderDom.hydrate(renderApp, root);
