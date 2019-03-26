@@ -1,23 +1,23 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import App from './app';
+import { rootReducer } from 'app/reducer';
 
-const reducers = {};
-const middleware = [];
-/*TODO доделать  редюсер*/
-/*TODO далее разбить на отдельные файлы для combineReducers(reducers), middleware*/
-const store = createStore(combineReducers(reducers), composeWithDevTools(applyMiddleware(thunk)));
+/* TODO middleware пока что нам не нужен */
+// const middleware;
 
-function renderApp() {
-    return render(
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+
+function RenderApp() {
+    return (
         <Provider store={store}>
             <App />
-        </Provider>,
+        </Provider>
     );
 }
 
-export default renderApp;
+
+export default RenderApp;
