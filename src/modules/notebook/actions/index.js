@@ -1,20 +1,20 @@
 import { createAction } from 'redux-act';
+import { fetch } from 'whatwg-fetch';
 
-const actionLoading = createAction('loading');
-const actionSuccess = createAction('success');
-const actionFail = createAction('fail');
+const catalogListLoad = createAction('Catalog list load');
+const catalogListSuccess = createAction('Catalog list load success');
+const catalogListFail = createAction('Catalog list load fail');
 
-function testAction() {
+function getCatalogList() {
     return async (dispatch) => {
-        dispatch(actionLoading());
+        dispatch(catalogListLoad());
 
         try {
-            const data = {
-                test: 'test',
-            };
-            dispatch(actionSuccess(data));
+            const { data } = await fetch('/api/catalog.json').then(r => r.json());
+
+            dispatch(catalogListSuccess(data));
         } catch (error) {
-            dispatch(actionFail());
+            dispatch(catalogListFail());
 
             throw error;
         }
@@ -22,8 +22,8 @@ function testAction() {
 }
 
 export {
-    actionLoading,
-    actionSuccess,
-    actionFail,
-    testAction,
+    catalogListLoad,
+    catalogListSuccess,
+    catalogListFail,
+    getCatalogList,
 };

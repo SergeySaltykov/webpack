@@ -1,9 +1,9 @@
 import { notebookModule as moduleName } from 'app/reducer';
 
-function testSelector(state) {
+function selectorCatalogList(state) {
     return state[moduleName].data;
 }
 
 export {
-    testSelector,
+    selectorCatalogList,
 };

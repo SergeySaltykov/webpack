@@ -1,8 +1,8 @@
 import { createReducer } from 'redux-act';
 import {
-    actionLoading,
-    actionSuccess,
-    actionFail,
+    catalogListLoad,
+    catalogListSuccess,
+    catalogListFail,
 } from 'modules/notebook/actions';
 
 const initialState = {
@@ -11,16 +11,16 @@ const initialState = {
 };
 
 const notebook = createReducer({
-    [actionLoading]: state => ({
+    [catalogListLoad]: state => ({
         ...state,
         isLoading: true,
     }),
-    [actionSuccess]: (state, payload) => ({
+    [catalogListSuccess]: (state, payload) => ({
         ...state,
         data: payload,
         isLoading: false,
     }),
-    [actionFail]: (state, error) => ({
+    [catalogListFail]: (state, error) => ({
         ...state,
         ...error,
         isLoading: false,
