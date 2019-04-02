@@ -3,6 +3,7 @@ import {
     catalogListLoad,
     catalogListSuccess,
     catalogListFail,
+    updateList,
 } from 'modules/notebook/actions';
 
 const initialState = {
@@ -24,6 +25,10 @@ const notebook = createReducer({
         ...state,
         ...error,
         isLoading: false,
+    }),
+    [updateList]: (state, filter) => ({
+        ...state,
+        data: filter,
     }),
 }, initialState);
 

@@ -3,8 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './style.css';
-import { getCatalogList } from 'modules/notebook/actions';
+import { getCatalogList, updateCatalog } from 'modules/notebook/actions';
 import { selectorCatalogList } from 'modules/notebook/selectors';
+import { Search } from 'modules/notebook/components/Search';
 
 /* TODO сделать типизирование */
 type TProps = {
@@ -21,25 +22,29 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         getCatalogList,
+        updateCatalog,
     }, dispatch);
 }
 
 class NoteBookContainer extends React.Component<TProps> {
     componentDidMount() {
         const { getCatalogList } = this.props;
+
         getCatalogList();
     }
 
     render() {
-        const { catalog } = this.props;
+        const { catalog, updateCatalog } = this.props;
 
         if (!catalog.length) {
             return null;
         }
-        console.log(this.props);
+
         return (
             <div>
                 <h1>NoteBookContainer</h1>
+                <Search catalog={catalog} update={updateCatalog} />
+                <br />
                 {catalog.map(({
                     name, phone, birthday, group, id,
                 }) => (
