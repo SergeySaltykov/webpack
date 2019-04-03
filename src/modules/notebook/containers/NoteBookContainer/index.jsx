@@ -8,7 +8,7 @@ import './style.css';
 import { getCatalogList, updateCatalog } from 'modules/notebook/actions';
 import { selectorCatalogList, selectorUpdateCatalogList } from 'modules/notebook/selectors';
 import { Search } from 'modules/notebook/components/Search';
-import { FilterSelect } from 'modules/notebook/components/Filter';
+import { FilterSelect } from 'modules/notebook/components/FilterSelect';
 
 /* TODO сделать типизирование */
 type TProps = {
