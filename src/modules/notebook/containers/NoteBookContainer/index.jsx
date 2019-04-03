@@ -1,3 +1,5 @@
+import { FilterCheckbox } from 'modules/notebook/components/filterCheckbox';
+
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
@@ -6,6 +8,7 @@ import './style.css';
 import { getCatalogList, updateCatalog } from 'modules/notebook/actions';
 import { selectorCatalogList, selectorUpdateCatalogList } from 'modules/notebook/selectors';
 import { Search } from 'modules/notebook/components/Search';
+import { FilterSelect } from 'modules/notebook/components/Filter';
 
 /* TODO сделать типизирование */
 type TProps = {
@@ -45,6 +48,8 @@ class NoteBookContainer extends React.Component<TProps> {
             <div>
                 <h1>NoteBookContainer</h1>
                 <Search catalog={catalog} update={updateCatalog} />
+                <FilterSelect catalog={catalog} update={updateCatalog} />
+                <FilterCheckbox catalog={catalog} update={updateCatalog} />
                 <br />
                 {filter.map(({
                     name, phone, birthday, group, id,
