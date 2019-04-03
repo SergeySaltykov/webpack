@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './style.css';
 import { getCatalogList, updateCatalog } from 'modules/notebook/actions';
-import { selectorCatalogList } from 'modules/notebook/selectors';
+import { selectorCatalogList, selectorUpdateCatalogList } from 'modules/notebook/selectors';
 import { Search } from 'modules/notebook/components/Search';
 
 /* TODO сделать типизирование */
@@ -16,6 +16,7 @@ type TProps = {
 function mapStateToProps(state) {
     return {
         catalog: selectorCatalogList(state),
+        filter: selectorUpdateCatalogList(state),
     };
 }
 
@@ -34,9 +35,9 @@ class NoteBookContainer extends React.Component<TProps> {
     }
 
     render() {
-        const { catalog, updateCatalog } = this.props;
+        const { catalog, updateCatalog, filter } = this.props;
 
-        if (!catalog.length) {
+        if (!filter.length) {
             return null;
         }
 
@@ -45,7 +46,7 @@ class NoteBookContainer extends React.Component<TProps> {
                 <h1>NoteBookContainer</h1>
                 <Search catalog={catalog} update={updateCatalog} />
                 <br />
-                {catalog.map(({
+                {filter.map(({
                     name, phone, birthday, group, id,
                 }) => (
                     <div key={id}>

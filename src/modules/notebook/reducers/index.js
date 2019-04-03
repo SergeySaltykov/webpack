@@ -7,7 +7,8 @@ import {
 } from 'modules/notebook/actions';
 
 const initialState = {
-    data: {},
+    data: [],
+    filter: [],
     isLoading: false,
 };
 
@@ -19,6 +20,7 @@ const notebook = createReducer({
     [catalogListSuccess]: (state, payload) => ({
         ...state,
         data: payload,
+        filter: payload,
         isLoading: false,
     }),
     [catalogListFail]: (state, error) => ({
@@ -28,7 +30,7 @@ const notebook = createReducer({
     }),
     [updateList]: (state, filter) => ({
         ...state,
-        data: filter,
+        filter,
     }),
 }, initialState);
 
