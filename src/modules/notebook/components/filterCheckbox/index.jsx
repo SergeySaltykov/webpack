@@ -1,11 +1,12 @@
 // @flow
 import React from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 
-/* TODO сделать типизирование */
-type TProps = {};
+import type { TCatalog } from 'modules/notebook/type';
 
+type TProps = {
+    catalog: TCatalog[],
+    update: Function,
+};
 
 class FilterCheckbox extends React.Component<TProps> {
     handleSearchName = (e) => {
@@ -28,7 +29,6 @@ class FilterCheckbox extends React.Component<TProps> {
         );
     }
 }
-
 
 export {
     FilterCheckbox,

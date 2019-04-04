@@ -1,19 +1,19 @@
-export type TCatalog = {
-    birthday: string,
-    group: string,
-    id: string,
-    name: string,
-    phone: string,
-    select?: boolean,
+// @flow
+
+import { TRootReducer } from 'app/reducer';
+import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
+
+type ExtractReturnFunction = <V>(() => V) => V;
+
+export type TActionDefault = {
+    payload?: {},
+    type: string,
 };
 
-export type tState = {
-    data: Array<TCatalog>,
-    error: Object,
-    filter: Array<TCatalog>,
-    isLoading: boolean,
-};
-
-export type tAction = {
-
-};
+export type TState = $ObjMap<TRootReducer, ExtractReturnFunction>;
+export type TGetState = () => TState;
+export type TStore = ReduxStore<TState, TActionDefault>;
+export type TDispatch =
+    & ReduxDispatch<TActionDefault>
+    & TThunk<TActionDefault>
+export type TThunk<A> = ((TDispatch, TGetState) => Promise<void> | void) => A;

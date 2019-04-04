@@ -1,6 +1,5 @@
-import { FilterCheckbox } from 'modules/notebook/components/filterCheckbox';
-
 // @flow
+import type { TState } from 'app/types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,14 +8,18 @@ import { getCatalogList, updateCatalog } from 'modules/notebook/actions';
 import { selectorCatalogList, selectorUpdateCatalogList } from 'modules/notebook/selectors';
 import { Search } from 'modules/notebook/components/Search';
 import { FilterSelect } from 'modules/notebook/components/FilterSelect';
+import { FilterCheckbox } from 'modules/notebook/components/filterCheckbox';
 
-/* TODO сделать типизирование */
+import type { TCatalog } from 'modules/notebook/type';
+/*TODO function*/
 type TProps = {
-    // catalog: string,
-    // getCatalogList: getCatalogList<typeof >,
+    catalog: Array<TCatalog>, /* or TCatalog[] упрощенный вид */
+    filter: TCatalog[],
+    // getCatalogList: ,
+    // updateCatalog: ,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state: TState): Object { /* for example */
     return {
         catalog: selectorCatalogList(state),
         filter: selectorUpdateCatalogList(state),
@@ -33,9 +36,11 @@ function mapDispatchToProps(dispatch) {
 class NoteBookContainer extends React.Component<TProps> {
     componentDidMount() {
         const { getCatalogList } = this.props;
-
+        console.log(getCatalogList);
         getCatalogList();
     }
+
+    // componentDidUpdate(nextProps: TProps) {}
 
     render() {
         const { catalog, updateCatalog, filter } = this.props;

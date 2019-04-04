@@ -1,9 +1,12 @@
 // @flow
 import React from 'react';
 
-/* TODO сделать типизирование */
-type TProps = {};
+import type { TCatalog } from 'modules/notebook/type';
 
+type TProps = {
+    catalog: TCatalog[],
+    update: Function,
+};
 
 class FilterSelect extends React.PureComponent<TProps> {
     handleFilterGroup = (e) => {

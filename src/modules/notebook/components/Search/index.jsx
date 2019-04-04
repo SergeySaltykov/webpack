@@ -1,11 +1,13 @@
 // @flow
 import React from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 
-/* TODO сделать типизирование */
-type TProps = {};
+import type { TCatalog } from 'modules/notebook/type';
 
+ /*TODO update: Function,*/
+type TProps = {
+    catalog: TCatalog[],
+    update: Function,
+};
 
 class Search extends React.Component<TProps> {
     handleSearchName = (e) => {
@@ -13,7 +15,6 @@ class Search extends React.Component<TProps> {
         const currentValue = e.target.value.toLowerCase();
 
         const filter = catalog.filter(user => user.name.toLowerCase().includes(currentValue));
-        console.log(filter);
 
         update(filter);
     };
@@ -30,7 +31,6 @@ class Search extends React.Component<TProps> {
         );
     }
 }
-
 
 export {
     Search,

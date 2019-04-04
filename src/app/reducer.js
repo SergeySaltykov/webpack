@@ -10,4 +10,6 @@ const rootReducer = combineReducers({
 export {
     notebookModule,
     rootReducer,
-}
+};
+
+export type TRootReducer = typeof rootReducer;
