@@ -16,8 +16,8 @@ import type { SyntheticInputEvent, SyntheticEvent } from 'react';
 type TProps = {
     catalog: Array<TCatalog>, /* or TCatalog[] упрощенный вид */
     filter: TCatalog[],
-    getCatalogList: bindActionCreators<typeof getCatalogList>,
-    updateCatalog: bindActionCreators<typeof updateCatalog>,
+    getCatalogList: typeof getCatalogList,
+    updateCatalog: typeof updateCatalog,
 };
 
 function mapStateToProps(state: TState): Object { /* for example */
