@@ -11,12 +11,13 @@ import { FilterSelect } from 'modules/notebook/components/FilterSelect';
 import { FilterCheckbox } from 'modules/notebook/components/filterCheckbox';
 
 import type { TCatalog } from 'modules/notebook/type';
-/*TODO function*/
+import type { SyntheticInputEvent, SyntheticEvent } from 'react';
+
 type TProps = {
     catalog: Array<TCatalog>, /* or TCatalog[] упрощенный вид */
     filter: TCatalog[],
-    // getCatalogList: ,
-    // updateCatalog: ,
+    getCatalogList: bindActionCreators<typeof getCatalogList>,
+    updateCatalog: bindActionCreators<typeof updateCatalog>,
 };
 
 function mapStateToProps(state: TState): Object { /* for example */
@@ -36,14 +37,44 @@ function mapDispatchToProps(dispatch) {
 class NoteBookContainer extends React.Component<TProps> {
     componentDidMount() {
         const { getCatalogList } = this.props;
-        console.log(getCatalogList);
+
         getCatalogList();
     }
 
     // componentDidUpdate(nextProps: TProps) {}
 
+    handleChangeSearchName = (e: SyntheticInputEvent<HTMLInputElement>): void => {
+        const { catalog, updateCatalog } = this.props;
+        const currentValue = e.target.value.toLowerCase();
+
+        const filter = catalog.filter(user => user.name.toLowerCase().includes(currentValue));
+
+        updateCatalog(filter);
+    };
+
+    handleChangeFilterGroup = (e: SyntheticEvent<HTMLSelectElement>):void => {
+        const { catalog, updateCatalog } = this.props;
+        const currentValue = e.target.value.toLowerCase();
+
+        if (currentValue !== 'all') {
+            const curSelect = catalog.filter(user => user.group.toLowerCase().includes(currentValue));
+            updateCatalog(curSelect);
+        } else {
+            updateCatalog(catalog);
+        }
+    };
+
+    handleChangeCheckbox = (e: SyntheticInputEvent<HTMLInputElement>):void => {
+        const { catalog, updateCatalog } = this.props;
+        const currentValue = e.currentTarget.checked;
+
+        const checked = currentValue ? catalog.filter(user => user.select) : catalog;
+
+        updateCatalog(checked);
+    };
+
     render() {
-        const { catalog, updateCatalog, filter } = this.props;
+        const { catalog, filter } = this.props;
 
         if (!filter.length) {
             return null;
@@ -52,9 +83,9 @@ class NoteBookContainer extends React.Component<TProps> {
         return (
             <div>
                 <h1>NoteBookContainer</h1>
-                <Search catalog={catalog} update={updateCatalog} />
-                <FilterSelect catalog={catalog} update={updateCatalog} />
-                <FilterCheckbox catalog={catalog} update={updateCatalog} />
+                <Search onChange={this.handleChangeSearchName} />
+                <FilterSelect catalog={catalog} onChange={this.handleChangeFilterGroup} />
+                <FilterCheckbox onChange={this.handleChangeCheckbox} />
                 <br />
                 {filter.map(({
                     name, phone, birthday, group, id,

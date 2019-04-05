@@ -1,29 +1,19 @@
 // @flow
 import React from 'react';
 
-import type { TCatalog } from 'modules/notebook/type';
-
 type TProps = {
-    catalog: TCatalog[],
-    update: Function,
+    onChange: (e: HTMLInputElement) => void,
 };
 
 class FilterCheckbox extends React.Component<TProps> {
-    handleSearchName = (e) => {
-        const { catalog, update } = this.props;
-        const currentValue = e.target.checked;
-
-        const checked = currentValue ? catalog.filter(user => user.select) : catalog;
-
-        update(checked);
-    };
-
     render() {
+        const { onChange } = this.props;
+
         return (
             <div className="checkbox">
                 <input
                     type="checkbox"
-                    onChange={this.handleSearchName}
+                    onChange={onChange}
                 />
             </div>
         );
