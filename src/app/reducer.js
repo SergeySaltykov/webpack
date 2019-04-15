@@ -1,3 +1,4 @@
+// @flow
 import { combineReducers } from 'redux';
 import notebook from 'modules/notebook/reducers';
 

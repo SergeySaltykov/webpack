@@ -18,7 +18,7 @@ const initialState: TNoteBookState = {
 };
 
 const notebook = createReducer({
-    [catalogListLoad]: (state: TState): TNoteBookState => ({
+    [catalogListLoad]: (state: TNoteBookState): TNoteBookState => ({
         ...state,
         isLoading: true,
     }),

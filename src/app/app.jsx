@@ -1,3 +1,4 @@
+// @flow
 import { NoteBookContainer } from 'modules/notebook/containers/NoteBookContainer';
 import React from 'react';
 

@@ -9,9 +9,9 @@ export type TCatalog = {| /* строгое объявление без допо
     select?: boolean,
 |};
 
-export type TNoteBookState = {
+export type TNoteBookState = {|
     data: Array<TCatalog>, /* or TCatalog[] упрощенный вид */
     error: Object,
     filter: TCatalog[],
     isLoading: boolean,
-};
+|};
