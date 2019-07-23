@@ -1,0 +1,11 @@
+@import "./color.css";
+
+.component1 {
+    color: var(--error); /*теперь в браузере отобраиться поддержка новго ситнаксиса, или запасной вариант если версия браузера не поддерживает такой синтаксис*/
+    display: flex;
+    flex-direction: column;
+
+    &:hover{
+         color: var(--success);
+     }
+}
