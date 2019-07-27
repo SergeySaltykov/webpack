@@ -1,0 +1,34 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "name": "Ivan1",
+            "phone": "89528889636",
+            "birthday": "18.11.1996",
+            "group": "home"
+        },
+        {
+            "id": "2",
+            "name": "Ivan2",
+            "phone": "89995556633",
+            "birthday": "9.4.1982",
+            "group": "home",
+            "select": true
+        },
+        {
+            "id": "3",
+            "name": "Ivan3",
+            "phone": "87778889632",
+            "birthday": "03.8.1986",
+            "group": "work"
+        },
+        {
+            "id": "4",
+            "name": "Ivan4",
+            "phone": "89993656636",
+            "birthday": "11.6.2000",
+            "group": "school",
+            "select": true
+        }
+    ]
+}
